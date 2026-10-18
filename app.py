@@ -1,5 +1,6 @@
 import random
 from datetime import date
+import time
 import streamlit as st
 
 # Configuración de la página
@@ -7,7 +8,23 @@ st.set_page_config(
     page_title="Cuponera para Mamá", page_icon="🎁", layout="centered"
 )
 
-# 1. Configuración inicial de la memoria
+# Estilo visual CSS para la transición suave (desvanecimiento) de las fotos
+st.markdown(
+    """
+    <style>
+    @keyframes fadeIn {
+        from { opacity: 0.3; transform: scale(0.98); }
+        to { opacity: 1; transform: scale(1); }
+    }
+    .stImage {
+        animation: fadeIn 1.2s ease-in-out;
+    }
+    </style>
+""",
+    unsafe_allow_html=True,
+)
+
+# 1. Configuración inicial de la memoria (Stock de cupones)
 if "cupones" not in st.session_state:
   st.session_state.cupones = [
       "Lavar los platos🥛🥄",
@@ -144,6 +161,9 @@ if "cupon_hoy_canjeado" not in st.session_state:
 if "efecto" not in st.session_state:
   st.session_state.efecto = None
 
+if "foto_index" not in st.session_state:
+  st.session_state.foto_index = 0
+
 # Lanzar efectos visuales guardados
 if st.session_state.efecto == "globos":
   st.balloons()
@@ -191,25 +211,47 @@ with st.expander("ℹ️ INFO sobre cupones ℹ️"):
       """
   )
 
-# 4. GALERÍA DE FOTOS (RECUERDOS)
-with st.expander("📸 Nuestros Recuerdos"):
-  st.markdown("Un pequeño recorrido por algunos momentos juntos ❤️")
+# 4. GALERÍA DE FOTOS AUTOMÁTICA (CON TUS 17 FOTOS LIMPIAS)
+lista_fotos = [
+    "https://i.postimg.cc/HkgH0SCw/Screenshot-2026-10-17-22-59-51-113-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/SxhqLZpW/Screenshot-2026-10-17-23-00-03-103-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/FH4mbPQc/Screenshot-2026-10-17-23-00-17-928-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/SxhqLZpM/Screenshot-2026-10-17-23-00-28-019-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/cLSZ7DNK/Screenshot-2026-10-17-23-00-35-923-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/P5jhb6kC/Screenshot-2026-10-17-23-00-41-266-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/vZsM7Pdc/Screenshot-2026-10-17-23-00-49-470-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/NjcY8NwL/Screenshot-2026-10-17-23-02-11-735-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/YCHkNXw0/Screenshot-2026-10-17-23-02-42-527-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/L8pRkyMX/Screenshot-2026-10-17-23-03-10-745-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/DwTFQCKz/Screenshot-2026-10-17-23-03-27-268-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/Z5SZPfh5/Screenshot-2026-10-17-23-08-10-022-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/cLSZ7DNs/Screenshot-2026-10-17-23-08-19-884-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/rwkcGhLM/Screenshot-2026-10-17-23-08-50-007-com-google-android-apps-docs.jpg",
+    "https://i.postimg.cc/Bn0s5hGS/Screenshot-2026-10-17-23-09-06-833-com-google-android-apps-docs.png",
+    "https://i.postimg.cc/pLHxQ0tV/Screenshot-2026-10-17-23-09-19-540-com-google-android-apps-docs.png",
+    "https://i.postimg.cc/RVf4nk2q/Screenshot-2026-10-17-23-09-34-569-com-google-android-apps-docs.png",
+]
 
-  # Acá podés subir tus fotos a GitHub con nombres como "foto1.jpg", "foto2.jpg"
-  # y pasarlas acá adentro de st.image(). Por ahora te dejo un ejemplo listo:
+with st.expander("📸 Nuestros Recuerdos en Movimiento", expanded=True):
+  st.markdown("Un pequeño recorrido por los mejores momentos juntos ❤️")
+
+  foto_actual = lista_fotos[st.session_state.foto_index]
+
   try:
     st.image(
-        "foto1.jpg",
-        caption="¡Los mejores momentos con la mejor mamá!",
+        foto_actual,
+        caption=f"Recuerdo {st.session_state.foto_index + 1} de {len(lista_fotos)}",
         use_container_width=True,
     )
-    # st.image("foto2.jpg", caption="Otro lindo recuerdo", use_container_width=True)
   except:
-    st.info(
-        "💡 *Consejo:* Subí tus fotos (ej: foto1.jpg) a tu repositorio de GitHub"
-        " en la misma carpeta que el archivo app.py para que aparezcan acá"
-        " mágicamente."
-    )
+    st.info("📷 Cargando siguiente recuerdo...")
+
+  # Espera 10 segundos, cambia de foto automáticamente y recarga la vista de forma suave
+  time.sleep(10)
+  st.session_state.foto_index = (st.session_state.foto_index + 1) % len(
+      lista_fotos
+  )
+  st.rerun()
 
 st.title("🎁 CUPONERA PARA LA MEJOR, LA MAMÁ CON MÁS AGUANTE ♥️")
 
