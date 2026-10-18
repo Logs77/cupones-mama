@@ -325,7 +325,7 @@ lista_fotos = [
 ]
 
 with st.expander("📸 Nuestros Recuerdos en Movimiento"):
-  st.markdown("Un pequeño recorrido por los mejores momentos juntos ❤️")
+  st.markdown("Unas fotos por los mejores momentos ❤️")
 
   foto_actual = lista_fotos[st.session_state.foto_index]
 
