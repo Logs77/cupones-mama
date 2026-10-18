@@ -294,7 +294,7 @@ with st.expander("📸 Nuestros Recuerdos en Movimiento"):
     st.info("📷 Cargando siguiente recuerdo...")
 
   # Espera 10 segundos y pasa a la siguiente foto
-  time.sleep(10)
+  time.sleep(6)
   st.session_state.foto_index = (st.session_state.foto_index + 1) % len(
       lista_fotos
   )
