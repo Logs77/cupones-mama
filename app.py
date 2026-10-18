@@ -172,10 +172,10 @@ elif st.session_state.efecto == "nieve":
   st.snow()
   st.session_state.efecto = None
 
-# TÍTULO PRINCIPAL BIEN ARRIBA
+# TÍTULO PRINCIPAL
 st.title("🎁 CUPONERA PARA LA MEJOR, LA MAMÁ CON MÁS AGUANTE ♥️")
 
-# SISTEMA DE CUPONES Y LÍMITE DIARIO PRINCIPAL
+# SISTEMA DE CUPONES Y LÍMITE DIARIO
 hoy = date.today()
 ya_canjeo_hoy = st.session_state.ultima_fecha_canje == hoy
 
@@ -219,7 +219,39 @@ else:
 
 st.markdown("---")
 
-# 2. CARTITA (Desplegable abajo)
+# MÚSICA DE FONDO (Con los nombres largos reales que subiste)
+with st.expander("🎵 Elegí la música de fondo 🎵"):
+  st.markdown(
+      "Poné play en la canción que más te guste para acompañar el momento:"
+  )
+
+  st.caption("Opción 1: Cama y Mesa (Roberto Carlos)")
+  try:
+    st.audio(
+        "Roberto_Carlos_-_Cama_y_Mesa_Cama_e_Mesa_Cama_e_Mesa_(mp3.pm).mp3",
+        format="audio/mp3",
+    )
+  except:
+    pass
+
+  st.caption("Opción 2: Libertango Instrumental (Astor Piazzolla)")
+  try:
+    st.audio(
+        "Astor_Piazzolla_-_Libertango_Instrumental_(mp3.pm).mp3",
+        format="audio/mp3",
+    )
+  except:
+    pass
+
+  st.caption("Opción 3: Sin principio ni final (Abel Pintos)")
+  try:
+    st.audio(
+        "Abel_Pintos_-_Sin_principio_ni_Final_(mp3.pm).mp3", format="audio/mp3"
+    )
+  except:
+    pass
+
+# CARTITA
 with st.expander("💌 Ver carta especial para vos 💌"):
   st.markdown(
       """
@@ -234,7 +266,7 @@ with st.expander("💌 Ver carta especial para vos 💌"):
         """
   )
 
-# 3. INFO (Desplegable abajo)
+# INFO
 with st.expander("ℹ️ INFO sobre cupones ℹ️"):
   st.markdown(
       f"""
@@ -258,7 +290,7 @@ with st.expander("ℹ️ INFO sobre cupones ℹ️"):
       """
   )
 
-# 4. GALERÍA DE FOTOS AUTOMÁTICA AL FINAL (FUERA DE BUCLES QUE BLOQUEEN)
+# GALERÍA DE FOTOS AUTOMÁTICA
 lista_fotos = [
     "https://i.postimg.cc/HkgH0SCw/Screenshot-2026-10-17-22-59-51-113-com-google-android-apps-docs.jpg",
     "https://i.postimg.cc/SxhqLZpW/Screenshot-2026-10-17-23-00-03-103-com-google-android-apps-docs.jpg",
@@ -293,8 +325,7 @@ with st.expander("📸 Nuestros Recuerdos en Movimiento"):
   except:
     st.info("📷 Cargando siguiente recuerdo...")
 
-  # Espera 10 segundos y pasa a la siguiente foto
-  time.sleep(6)
+  time.sleep(10)
   st.session_state.foto_index = (st.session_state.foto_index + 1) % len(
       lista_fotos
   )
