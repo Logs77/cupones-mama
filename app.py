@@ -9,19 +9,20 @@ with st.expander("💌 Ver carta especial para vos 💌"):
       """
         ### ¡Feliz día má!
         Este programa (cuponera) lo hice con mucho amor, esfuerzo y programacion exclusivamente para vos♥️.     
+        
         Cada vez que necesites un favor o algo, podés usar un cupón apretando el boton. Este año no tuve plata para regalarte nada pero bueno aunque este regalo no sea casi nada se me ocurrio porque se programar, es para ayudarte en lo que necesites y lo que quieras.
+        
         Te quiero muchísimo, gracias por aguantarme todos los dias, se que es muy dificil mantener al mejor hijo del mundo😎. Pero bueno, aunque aveces discutimos, yo te quiero un montón y te voy a seguir queriendo mas todavía, se que aveces pido mucho pero bueno ya no te voy a pedir mas cosas (esperemos, na mentira), voy a intentar ayudarte en todo lo que pueda para devolverte un poquitito de lo que me das cada dia🫶.
-      ♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️
-      ♥️♥️Te quiero mucho ma♥️♥️
-      ♥️♥️♥️♥️FELÍZ DIA♥️♥️♥️♥️
-      ♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️♥️
+♥️♥️Te quiero mucho ma♥️♥️
+♥️♥️♥️♥️FELÍZ DIA♥️♥️♥️♥️
         """)
-with st.expander("ℹ️Info y sobre cuponesℹ️"):
+with st.expander("ℹ️INFO sobre cuponesℹ️"):
   st.markdown(
-      """
+      f"""
       ### 🎫Información sobre los cupones🎫:
-• Hay en total {len(st.session_state.cupones)} cupones. Cuando apretas el boton de -Sortear Cupón- aleatoriamente se elige uno de los {len(st.session_state.cupones)} cupones, inmediatamente ese cupon se borra, osea puede volver a salir ese pero ya se gasto uno de ese tipo (por ejemplo si habia 12 de lavar los platos y te toca uno, va a haber 11) Pero igual son muchos, te van a durar varios meses.
-•IMPORTANTE: Si no te gusta lo que te toco NO se gasta, elegis otro con boton de -REELEGIR-.
+•Hay en total {len(st.session_state.cupones)} cupones. Cuando apretas el boton de -Sortear Cupón- aleatoriamente se elige uno de los {len(st.session_state.cupones)} cupones, inmediatamente ese cupon se borra, osea puede volver a salir ese pero ya se gasto uno de ese tipo (por ejemplo si habia 12 de lavar los platos y te toca uno, va a haber 11) Pero igual son muchos, te van a durar varios meses.
+•‼️IMPORTANTE‼️: Si no te gusta lo que te toco NO se gasta, elegis otro con boton de -REELEGIR-.
+•‼️IMPORTANTE‼️: VIERNES Y SABADO NO LABURO😠
 • Y son estos (Su nombre y la cantidad que hay):
 -Lavar los platos 🍽️🥛 12
 -Sacar la basura 🗑️ 10
@@ -30,6 +31,7 @@ with st.expander("ℹ️Info y sobre cuponesℹ️"):
 -Ver peli 🎞️ 5
 -Tender la ropa 👕 8
 -Ordenar la ropa🧦👚🧣 7
+-Hacer la comida (o ayudarte) 🍗 15
 -Ordenar y limpiar la COCINA 🧹 5
 -Ordenar y limpiar la PIEZA 🛏️ 3
 -Ordenar y limpiar el BAÑO 🚽 3
@@ -124,6 +126,17 @@ if "cupones" not in st.session_state:
       "Hacer la comida (O ayudarte)🍗",
       "Hacer la comida (O ayudarte)🍗",
       "Hacer la comida (O ayudarte)🍗",
+      "Ordenar y limpiar la COCINA 🧹",
+      "Ordenar y limpiar la COCINA 🧹",
+      "Ordenar y limpiar la COCINA 🧹",
+      "Ordenar y limpiar la COCINA 🧹",
+      "Ordenar y limpiar la COCINA 🧹",
+      "Ordenar y limpiar la PIEZA 🛏️",
+      "Ordenar y limpiar la PIEZA 🛏️",
+      "Ordenar y limpiar la PIEZA 🛏️",
+      "Ordenar y limpiar el BAÑO 🚽",
+      "Ordenar y limpiar el BAÑO 🚽",
+      "Ordenar y limpiar el BAÑO 🚽",
       "Pedirme LO QUE QUIERAS🌠",
       "Pedirme LO QUE QUIERAS🌠",
       "Pedirme LO QUE QUIERAS🌠",
@@ -158,14 +171,15 @@ st.title("🎁 CUPONERA PARA LA MEJOR, LA MAMA CON MAS AGUANTE ♥️")
 if len(st.session_state.cupones) > 0:
   st.write(f"‼️ Cupones disponibles: 🎫 {len(st.session_state.cupones)}")
 
-  if st.button("✨ ¡Sortear Cupón! ✨"):
+  if st.button("✨¡SORTEAR CUPÓN!✨"):
     # Elegimos uno al azar
     elegido = random.choice(st.session_state.cupones)
-    # Lo borramos usando .remove() para que no vuelva a salir hasta que se acaben
-    st.session_state.cupones.remove(elegido)
-
     st.success("Te tocó este cupón 🎉")
     st.markdown(f"### 👉 **{elegido}**")
+  if st.button("✅ELEGIR ESE✅")
+    
+  if st.button("↪️RE-ELEGIR↪️"):
+    elegido = random.choice(st.session_state.cupones)
 else:
   st.balloons()
   st.warning("🥀¡uy se acabaron todos los cupones!😔")
