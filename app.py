@@ -48,7 +48,7 @@ def guardar_canje(fecha, cupon):
 
 df_canjes = cargar_canjes()
 
-# Lista completa inicial de cupones
+# Lista completa inicial de cuponess
 stock_inicial = [
     "Lavar los platos🥛🥄",
     "Lavar los platos🥛🥄",
