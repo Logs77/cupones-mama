@@ -19,7 +19,7 @@ st.markdown(
         to { opacity: 1; transform: scale(1); }
     }
     .stImage {
-        animation: fadeIn 1.2s ease-in-out;
+        animation: fadeIn 1.8s ease-in-out;
     }
     </style>
 """,
@@ -338,7 +338,7 @@ with st.expander("📸 Nuestros Recuerdos en Movimiento"):
   except:
     st.info("📷 Cargando siguiente recuerdo...")
 
-  time.sleep(10)
+  time.sleep(6)
   st.session_state.foto_index = (st.session_state.foto_index + 1) % len(
       lista_fotos
   )
