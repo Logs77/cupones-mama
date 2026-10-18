@@ -234,7 +234,7 @@ with st.expander("🎵 Elegí la música de fondo 🎵"):
   except:
     pass
 
-  st.caption("Opción 2: Libertango Instrumental (Astor Piazzolla)")
+  st.caption("Opción 2: Libertango (Astor Piazzolla)")
   try:
     st.audio(
         "Astor_Piazzolla_-_Libertango_Instrumental_(mp3.pm).mp3",
@@ -325,7 +325,7 @@ with st.expander("📸 Nuestros Recuerdos en Movimiento"):
   except:
     st.info("📷 Cargando siguiente recuerdo...")
 
-  time.sleep(10)
+  time.sleep(6)
   st.session_state.foto_index = (st.session_state.foto_index + 1) % len(
       lista_fotos
   )
