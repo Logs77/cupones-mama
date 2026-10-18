@@ -2,6 +2,11 @@ import random
 from datetime import date
 import streamlit as st
 
+# Configuración de la página
+st.set_page_config(
+    page_title="Cuponera para Mamá", page_icon="🎁", layout="centered"
+)
+
 # 1. Configuración inicial de la memoria
 if "cupones" not in st.session_state:
   st.session_state.cupones = [
@@ -136,6 +141,17 @@ if "ultima_fecha_canje" not in st.session_state:
 if "cupon_hoy_canjeado" not in st.session_state:
   st.session_state.cupon_hoy_canjeado = None
 
+if "efecto" not in st.session_state:
+  st.session_state.efecto = None
+
+# Lanzar efectos visuales guardados
+if st.session_state.efecto == "globos":
+  st.balloons()
+  st.session_state.efecto = None
+elif st.session_state.efecto == "nieve":
+  st.snow()
+  st.session_state.efecto = None
+
 # 2. CARTITA
 with st.expander("💌 Ver carta especial para vos 💌"):
   st.markdown(
@@ -175,11 +191,29 @@ with st.expander("ℹ️ INFO sobre cupones ℹ️"):
       """
   )
 
+# 4. GALERÍA DE FOTOS (RECUERDOS)
+with st.expander("📸 Nuestros Recuerdos"):
+  st.markdown("Un pequeño recorrido por algunos momentos juntos ❤️")
+
+  # Acá podés subir tus fotos a GitHub con nombres como "foto1.jpg", "foto2.jpg"
+  # y pasarlas acá adentro de st.image(). Por ahora te dejo un ejemplo listo:
+  try:
+    st.image(
+        "foto1.jpg",
+        caption="¡Los mejores momentos con la mejor mamá!",
+        use_container_width=True,
+    )
+    # st.image("foto2.jpg", caption="Otro lindo recuerdo", use_container_width=True)
+  except:
+    st.info(
+        "💡 *Consejo:* Subí tus fotos (ej: foto1.jpg) a tu repositorio de GitHub"
+        " en la misma carpeta que el archivo app.py para que aparezcan acá"
+        " mágicamente."
+    )
+
 st.title("🎁 CUPONERA PARA LA MEJOR, LA MAMÁ CON MÁS AGUANTE ♥️")
 
 hoy = date.today()
-
-# Comprobamos si ya canjeó un cupón hoy
 ya_canjeo_hoy = st.session_state.ultima_fecha_canje == hoy
 
 if ya_canjeo_hoy:
@@ -203,17 +237,17 @@ elif len(st.session_state.cupones) > 0:
     col1, col2 = st.columns(2)
     with col1:
       if st.button("✅ ELEGIR ESE ✅"):
-        # Se descuenta del stock y se registra la fecha de hoy
         st.session_state.cupones.remove(st.session_state.cupón_actual)
         st.session_state.ultima_fecha_canje = hoy
         st.session_state.cupon_hoy_canjeado = st.session_state.cupón_actual
         st.session_state.cupón_actual = None
-        st.balloons()
+        st.session_state.efecto = "globos"  # Activa GLOBOS
         st.rerun()
 
     with col2:
       if st.button("↪️ RE-ELEGIR ↪️"):
         st.session_state.cupón_actual = random.choice(st.session_state.cupones)
+        st.session_state.efecto = "nieve"  # Activa NIEVE
         st.rerun()
 
 else:
