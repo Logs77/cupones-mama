@@ -26,7 +26,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Archivo local en la nube para persistencia
+# Archivo local en la nube para persistencias
 ARCHIVO_CANJES = "canjes.csv"
 
 
